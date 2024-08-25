@@ -9,6 +9,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +27,17 @@ public class CodeGeneratorService {
                 .post()
                 .uri("/code_save")
                 .body(Mono.just(codeDto), CodeDto.class)
+                .retrieve()
+                .bodyToFlux(CodeDto.class)
+                .collectList()
+                .block();
+        return codesDto;
+    }
+
+    public List<CodeDto> findAllCodes() {
+        var codesDto = webClient
+                .get()
+                .uri("/get_codes")
                 .retrieve()
                 .bodyToFlux(CodeDto.class)
                 .collectList()

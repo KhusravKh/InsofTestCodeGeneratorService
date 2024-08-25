@@ -15,16 +15,14 @@
 <table id="example" class="table table-bordered" style="width: 100%">
     <thead>
     <tr>
-        <th>дата клика</th>
-        <th>координата X(пиксели)</th>
-        <th>координата Y(пиксели)</th>
+        <th>Login</th>
+        <th>Password</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="mousePosition : ${mousePositions}">
-        <td th:text="${mousePosition.createdAt}" />
-        <td th:text="${mousePosition.x}" />
-        <td th:text="${mousePosition.y}" />
+    <tr th:each="code : ${codes}">
+        <td th:text="${code.username}" />
+        <td th:text="${code.password}" />
     </tr>
     </tbody>
 </table>
