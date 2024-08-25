@@ -17,12 +17,10 @@ public class CodeGeneratorService {
 
     private final WebClient webClient;
 
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
     public List<CodeDto> generateCode() {
         var rand = new Random();
         var code = String.valueOf(1000 + rand.nextInt(9000));
-        var codeDto = new CodeDto(code, bCryptPasswordEncoder.encode(code));
+        var codeDto = new CodeDto(code, code);
         var codesDto = webClient
                 .post()
                 .uri("/code_save")
